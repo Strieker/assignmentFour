@@ -4,7 +4,13 @@ function countOfNegatives(numbers) {
   if (!Array.isArray(numbers)) {
     throw "Your input was not an array. I can only accept inputs that are arrays.";
   }
-  return numbers.filter(i => i < 0).length;
+  let countOfNegatives = 0;
+  for (i of numbers) {
+      if (i < 0) {
+        countOfNegatives++;
+      }
+  }
+  return countOfNegatives;
 }
 
 //2
@@ -47,14 +53,13 @@ function median(x, y, z) {
 
 //6
 function occurrences(string, char) {
-  if (typeof string !== "string" || typeof char !== "string") {
-    throw "I'm sorry, the argument you used to call the function is not a string. Please make the argument a string";
+  let repeatedCharCount = 0;
+  for(i of string) {
+    if (i === char) {
+      repeatedCharCount++;
+    }
   }
-  return string
-    .toLowerCase()
-    .split("")
-    .sort()
-    .filter(i => i === char).length;
+  return repeatedCharCount
 }
 
 //7
@@ -99,8 +104,6 @@ function mostInterestingPerson(people) {
 //10
 class Point {
   constructor(latitude, longitude) {
-    this.latitude = latitude;
-    this.longitude = longitude;
     if (
       Number.isNaN(latitude) ||
       Number.isNaN(longitude) ||
@@ -111,6 +114,8 @@ class Point {
     ) {
       throw "latitude or longitude is out of accepted range of either -90 degrees to 90 degrees or -180 degrees to 180 degrees respectively";
     }
+    this.latitude = latitude;
+    this.longitude = longitude;
   }
   inArcticCircle() {
     return this.latitude >= 66.563;
@@ -144,8 +149,8 @@ function randomValueFromSet(set) {
   if (typeof set !== "object" || Array.isArray(set)) {
     throw "I can only accept a set";
   }
-  set = [...set];
-  return set[Math.floor(Math.random() * set.length)];
+  let array = [...set];
+  return array[Math.floor(Math.random() * array.length)];
 }
 
 QUnit.test("My negative counter function works", t => {
